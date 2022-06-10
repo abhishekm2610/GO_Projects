@@ -1,2 +1,3 @@
-# GO_Projects
-GO Learning and Problem Solving
+# GO Projects
+
+GO Learning and Problem Solving projects by Abhishek M
