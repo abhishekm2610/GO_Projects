@@ -12,7 +12,10 @@ type Node struct {
 }
 
 func reverseRecursively(current *Node) *Node {
-	if current == nil || current.Next == nil {
+	if current == nil {
+		return current
+	}
+	if current.Next == nil {
 		current.Next = current.Prev
 		current.Prev = current.Next
 		return current
@@ -49,7 +52,7 @@ func printList(head *Node) {
 	}
 }
 func main() {
-	originalList := []int{1, 2, 3, 4, 5}
+	originalList := []int{}
 	var head *Node
 	var tail *Node
 	for _, v := range originalList {
