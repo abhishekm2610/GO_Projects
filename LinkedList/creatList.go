@@ -7,8 +7,29 @@ type Node struct {
 	next *Node
 }
 
+func reverseList(head *Node) *Node {
+	if head == nil || head.next == nil {
+		return head
+	}
+
+	newHead := reverseList(head.next)
+	right := head.next
+	right.next = head
+
+	head.next = nil
+
+	return newHead
+
+}
+
+func printList(head *Node) {
+	for head != nil {
+		fmt.Println(head.val)
+		head = head.next
+	}
+}
 func main() {
-	arrayOfInt := []int{1, 2, 3, 4, 5}
+	arrayOfInt := []int{}
 	var head *Node
 	var tail *Node
 	for _, v := range arrayOfInt {
@@ -23,8 +44,5 @@ func main() {
 		}
 		tail = &nodeObj
 	}
-	for head != nil {
-		fmt.Println(head.val)
-		head = head.next
-	}
+	printList(reverseList(head))
 }
