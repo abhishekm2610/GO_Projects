@@ -11,6 +11,21 @@ type Node struct {
 	Prev  *Node
 }
 
+func reverseRecursively(current *Node) *Node {
+	if current == nil || current.Next == nil {
+		current.Next = current.Prev
+		current.Prev = current.Next
+		return current
+	}
+
+	newHead := reverseRecursively(current.Next)
+
+	current.Next = current.Prev
+	current.Prev = current.Next
+
+	return newHead
+
+}
 func returnElemAtIndex(head *Node, index int) (*Node, error) {
 	var targetNode *Node
 	for index >= 0 {
@@ -25,6 +40,13 @@ func returnElemAtIndex(head *Node, index int) (*Node, error) {
 
 	return targetNode, nil
 
+}
+
+func printList(head *Node) {
+	for head != nil {
+		fmt.Println(head.Value)
+		head = head.Next
+	}
 }
 func main() {
 	originalList := []int{1, 2, 3, 4, 5}
@@ -54,15 +76,6 @@ func main() {
 		fmt.Println(targetNode.Value)
 
 	}
-	fmt.Println("Forward")
-	for head != nil {
-		fmt.Println(head.Value)
-		head = head.Next
-	}
-	fmt.Println("Reverse")
-	for tail != nil {
-		fmt.Println(tail.Value)
-		tail = tail.Prev
-	}
 
+	printList(reverseRecursively(head))
 }

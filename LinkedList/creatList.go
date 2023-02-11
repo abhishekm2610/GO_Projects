@@ -11,15 +11,24 @@ func reverseList(head *Node) *Node {
 	if head == nil || head.next == nil {
 		return head
 	}
-
 	newHead := reverseList(head.next)
 	right := head.next
 	right.next = head
-
 	head.next = nil
-
 	return newHead
 
+}
+
+func reverseInteratively(head *Node) *Node {
+	var prev *Node
+	prev = nil
+	for head != nil {
+		temp := head.next
+		head.next = prev
+		prev = head
+		head = temp
+	}
+	return prev
 }
 
 func printList(head *Node) {
@@ -29,7 +38,7 @@ func printList(head *Node) {
 	}
 }
 func main() {
-	arrayOfInt := []int{}
+	arrayOfInt := []int{1, 2, 3, 4, 5}
 	var head *Node
 	var tail *Node
 	for _, v := range arrayOfInt {
@@ -44,5 +53,6 @@ func main() {
 		}
 		tail = &nodeObj
 	}
-	printList(reverseList(head))
+	printList(head)
+	printList(reverseInteratively(head))
 }
