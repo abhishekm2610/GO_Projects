@@ -3,9 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func palindromeChecker(op1 int) bool {
@@ -40,5 +42,9 @@ func main() {
 	// remove the delimeter from the string
 	input = strings.TrimSuffix(input, "\r\n")
 	intVar, err := strconv.Atoi(input)
+	start := time.Now()
+
 	fmt.Println(palindromeChecker(intVar))
+	elapsed := time.Since(start)
+	log.Printf("Runtime took %s", elapsed)
 }
