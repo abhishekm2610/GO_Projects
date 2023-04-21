@@ -37,6 +37,15 @@ func printList(head *Node) {
 		head = head.next
 	}
 }
+func oddEvenRearrange(head *Node) {
+	// var dummyNode Node
+	// dummyNode.next=nil
+	// var curr *Node
+	// curr = &dummyNode
+	var odd *Node
+	var even *Node
+
+}
 func main() {
 	arrayOfInt := []int{1, 2, 3, 4, 5}
 	var head *Node
