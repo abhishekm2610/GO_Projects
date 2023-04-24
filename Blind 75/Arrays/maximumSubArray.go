@@ -6,18 +6,18 @@ import (
 )
 
 func maxSubArray(nums []int) int {
-	runningSum := 0
-	sum := nums[0]
-	value := 0
-	for value < len(nums) {
-		if runningSum < 0 {
-			runningSum = 0
-		}
-		runningSum += nums[value]
-		sum = int(math.Max(float64(sum), float64(runningSum)))
-		value++
+	currentMax := 0
+	overallMax := nums[0]
+	for i := 0; i < len(nums); i++ {
+		// if currentMax < 0 {
+		// 	currentMax = 0
+		// }
+		// currentMax += nums[i]
+		currentMax = int(math.Max(float64(nums[i]), float64(currentMax+nums[i])))
+		overallMax = int(math.Max(float64(overallMax), float64(currentMax)))
+		fmt.Println(currentMax, overallMax)
 	}
-	return sum
+	return overallMax
 }
 
 // func maxSubArray(nums []int) int {
