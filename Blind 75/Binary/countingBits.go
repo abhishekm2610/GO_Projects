@@ -4,15 +4,7 @@ import (
 	"fmt"
 )
 
-func hammingWeight(num uint32) int {
-	count := 0
-	for num != 0 {
-		num = num & (num - 1)
-		count++
-	}
-	return count
-}
-func countBits(n int) []int {
+func countBitsv0(n int) []int {
 	ans := []int{}
 	for i := 0; i < n+1; i++ {
 		tmp := i
@@ -26,6 +18,20 @@ func countBits(n int) []int {
 		ans = append(ans, count)
 	}
 	return ans
+}
+
+func countBits(n int) []int {
+	dp := make([]int, n+1)
+	current2Power := 1
+	dp[0] = 0
+	for i := 1; i <= n; i++ {
+		if 2*current2Power == i {
+			current2Power = i
+
+		}
+		dp[i] = 1 + dp[i-current2Power]
+	}
+	return dp
 }
 func main() {
 
