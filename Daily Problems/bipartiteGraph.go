@@ -19,36 +19,44 @@ func maxVal(a int, b int) int {
 	}
 	return b
 }
+
 func isBipartite(graph [][]int) bool {
-	// s1 := make(map[int]bool)
-	// color := make(map[int]bool)
 	visited := make(map[int]int)
 	for i := 0; i < len(graph); i++ {
 		visited[i] = -1
 	}
-	fmt.Println(visited)
-
-	for i, _ := range graph {
-		if !visited[i] {
-			for _, edge := range graph[i] {
-				nei := graph[edge]
-				for _, n := range nei {
-					if s2[n] {
-						return false
-					}
-					if n != i {
-						visited[i] = true
-
-						s2[n] = true
-					}
+	var dfs func(node int, prev int) bool
+	dfs = func(node int, prev int) bool {
+		var cur int
+		if prev == 0 {
+			cur = 1
+		} else {
+			cur = 0
+		}
+		for _, edge := range graph[node] {
+			if visited[edge] == visited[node] {
+				return false
+			} else if visited[edge] == -1 {
+				visited[edge] = cur
+				if !dfs(edge, cur) {
+					return false
 				}
 			}
 		}
-		s2 = make(map[int]bool)
+		return true
+	}
+
+	for i, _ := range graph {
+		if visited[i] == -1 {
+			visited[i] = 0
+		}
+		if !dfs(i, visited[i]) {
+			return false
+		}
 	}
 	return true
 }
 func main() {
-	nums := [][]int{{1, 3}, {0, 2}, {1, 3}, {0, 2}}
+	nums := [][]int{{1}, {0, 3}, {3}, {1, 2}}
 	fmt.Println(isBipartite(nums))
 }
